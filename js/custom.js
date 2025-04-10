@@ -45,11 +45,13 @@ function initCyberCursor() {
   
   const cursor = document.createElement('div');
   cursor.classList.add('cyber-cursor');
+  cursor.style.position = 'fixed'; // Ensure fixed positioning
   document.body.appendChild(cursor);
   
   document.addEventListener('mousemove', function(e) {
-    cursor.style.left = e.pageX + 'px';
-    cursor.style.top = e.pageY + 'px';
+    // Use clientX/Y for fixed position relative to viewport
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
   });
   
   // Add click effect
@@ -57,8 +59,10 @@ function initCyberCursor() {
     // Create ripple effect
     const ripple = document.createElement('div');
     ripple.classList.add('cyber-ripple');
-    ripple.style.left = e.pageX + 'px';
-    ripple.style.top = e.pageY + 'px';
+    // Use clientX/Y for viewport positioning
+    ripple.style.left = e.clientX + 'px';
+    ripple.style.top = e.clientY + 'px';
+    ripple.style.position = 'fixed'; // Make ripple fixed position
     document.body.appendChild(ripple);
     
     // Remove after animation completes

@@ -50,7 +50,7 @@ document.write('<script src="/js/custom.js"></script>');
     
     /* Cyberpunk cursor with warm colors */
     .cyber-cursor {
-      position: fixed;
+      position: fixed; /* Ensure fixed positioning */
       width: 20px;
       height: 20px;
       border: 2px solid #e67e22;
@@ -61,6 +61,24 @@ document.write('<script src="/js/custom.js"></script>');
       box-shadow: 0 0 15px #e67e22, 0 0 10px #ff7800, 0 0 20px #e67e22;
       mix-blend-mode: screen;
       transition: width 0.2s, height 0.2s;
+    }
+    
+    /* Cyberpunk ripple effect */
+    .cyber-ripple {
+      position: fixed; /* Changed to fixed position */
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(230, 126, 34, 0.8) 0%, rgba(255, 120, 0, 0.5) 40%, rgba(0, 0, 0, 0) 70%);
+      width: 10px;
+      height: 10px;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      animation: cyber-ripple 1s ease-out;
+    }
+    
+    @keyframes cyber-ripple {
+      0% { width: 0px; height: 0px; opacity: 1; }
+      100% { width: 200px; height: 200px; opacity: 0; }
     }
     
     html, body { cursor: none !important; }
@@ -122,18 +140,22 @@ document.write('<script src="/js/custom.js"></script>');
     if (!document.querySelector('.cyber-cursor')) {
       const cursor = document.createElement('div');
       cursor.classList.add('cyber-cursor');
+      cursor.style.position = 'fixed'; // Ensure fixed positioning
       document.body.appendChild(cursor);
       
       document.addEventListener('mousemove', function(e) {
-        cursor.style.left = e.pageX + 'px';
-        cursor.style.top = e.pageY + 'px';
+        // Use clientX/Y for fixed position relative to viewport
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
       });
       
       document.addEventListener('click', function(e) {
         const ripple = document.createElement('div');
         ripple.classList.add('cyber-ripple');
-        ripple.style.left = e.pageX + 'px';
-        ripple.style.top = e.pageY + 'px';
+        // Use clientX/Y for viewport positioning
+        ripple.style.left = e.clientX + 'px';
+        ripple.style.top = e.clientY + 'px';
+        ripple.style.position = 'fixed'; // Ensure fixed position
         document.body.appendChild(ripple);
         
         setTimeout(() => {

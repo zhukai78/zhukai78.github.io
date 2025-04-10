@@ -76,7 +76,7 @@ body {
 
 /* Warm cyberpunk cursor */
 .cyber-cursor {
-  position: fixed;
+  position: fixed !important;
   width: 20px;
   height: 20px;
   border: 2px solid #e67e22;
@@ -87,6 +87,9 @@ body {
   box-shadow: 0 0 15px #e67e22, 0 0 10px #ff7800, 0 0 20px #e67e22;
   mix-blend-mode: screen;
   transition: width 0.2s, height 0.2s;
+  will-change: transform;
+  top: 0;
+  left: 0;
 }
 
 html, body {
@@ -99,7 +102,7 @@ a, button, input {
 
 /* Cyberpunk ripple effect with warm colors */
 .cyber-ripple {
-  position: absolute;
+  position: fixed !important;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(230, 126, 34, 0.8) 0%, rgba(255, 120, 0, 0.5) 40%, rgba(0, 0, 0, 0) 70%);
   width: 10px;
