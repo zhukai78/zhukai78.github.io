@@ -7,35 +7,58 @@ document.write('<script src="/js/custom.js"></script>');
   // Create the styles directly in case the CSS file doesn't load
   const style = document.createElement('style');
   style.textContent = `
-    /* Snowflake effect */
-    .snowflake {
+    /* Starlight effect */
+    .star {
       position: fixed;
       top: -10px;
-      color: #fff;
-      font-size: 1.5em;
-      text-shadow: 0 0 5px rgba(0, 195, 255, 0.7);
-      z-index: 9999;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 5px rgba(255, 200, 100, 0.8), 0 0 10px rgba(255, 150, 50, 0.3);
+      z-index: 9995;
       pointer-events: none;
       user-select: none;
-      animation: snowfall linear infinite;
+      animation: starfall linear infinite;
     }
     
-    @keyframes snowfall {
-      0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(100vh) rotate(360deg); }
+    .star.twinkle {
+      animation: twinkle linear infinite;
     }
     
-    /* Cyberpunk cursor */
+    @keyframes starfall {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+    }
+    
+    @keyframes twinkle {
+      0%, 100% { 
+        opacity: 0.2;
+        width: 1px;
+        height: 1px;
+        box-shadow: 0 0 2px rgba(255, 200, 100, 0.4), 0 0 4px rgba(255, 150, 50, 0.2);
+      }
+      50% { 
+        opacity: 1;
+        width: 2px;
+        height: 2px;
+        box-shadow: 0 0 5px rgba(255, 200, 100, 0.8), 0 0 10px rgba(255, 150, 50, 0.3);
+      }
+    }
+    
+    /* Cyberpunk cursor with warm colors */
     .cyber-cursor {
       position: fixed;
       width: 20px;
       height: 20px;
-      border: 2px solid #0ff;
+      border: 2px solid #e67e22;
       border-radius: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 9999;
-      box-shadow: 0 0 15px #0ff, 0 0 10px #f0f, 0 0 20px #0ff;
+      box-shadow: 0 0 15px #e67e22, 0 0 10px #ff7800, 0 0 20px #e67e22;
       mix-blend-mode: screen;
       transition: width 0.2s, height 0.2s;
     }
@@ -43,40 +66,56 @@ document.write('<script src="/js/custom.js"></script>');
     html, body { cursor: none !important; }
     a, button, input { cursor: none !important; }
     
-    /* Cyberpunk ripple effect */
-    .cyber-ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 255, 255, 0.8) 0%, rgba(255, 0, 255, 0.5) 40%, rgba(0, 0, 0, 0) 70%);
-      width: 10px;
-      height: 10px;
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-      z-index: 9999;
-      animation: cyber-ripple 1s ease-out;
+    /* Dark theme overrides */
+    body {
+      background-image: linear-gradient(to bottom, #0a0a0a, #121212);
+      color: #e0e0e0;
     }
     
-    @keyframes cyber-ripple {
-      0% { width: 0px; height: 0px; opacity: 1; }
-      100% { width: 200px; height: 200px; opacity: 0; }
+    .card-widget {
+      background: rgba(30, 30, 30, 0.8) !important;
+      box-shadow: 0 0 10px rgba(230, 126, 34, 0.1) !important;
     }
   `;
   document.head.appendChild(style);
 
   // Function to initialize everything
   function initAll() {
-    // Create snowflakes
-    const snowflakes = 50;
+    // Create starlight effect
+    const stars = 100;
     const body = document.querySelector('body');
     
-    for (let i = 0; i < snowflakes; i++) {
-      const snowflake = document.createElement('div');
-      snowflake.classList.add('snowflake');
-      snowflake.textContent = '❄';
-      snowflake.style.left = Math.random() * 100 + 'vw';
-      snowflake.style.animationDelay = Math.random() * 10 + 's';
-      snowflake.style.animationDuration = 5 + Math.random() * 10 + 's';
-      body.appendChild(snowflake);
+    for (let i = 0; i < stars; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      
+      // Randomize star properties
+      const size = Math.random() * 2 + 1;
+      const isTwinkle = Math.random() > 0.7; // 30% stars will twinkle
+      
+      if (isTwinkle) {
+        star.classList.add('twinkle');
+      }
+      
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.width = star.style.height = size + 'px';
+      star.style.opacity = Math.random() * 0.5 + 0.5;
+      
+      // Different animation speeds
+      if (isTwinkle) {
+        star.style.animationDuration = 1 + Math.random() * 3 + 's';
+      } else {
+        star.style.animationDuration = 50 + Math.random() * 100 + 's';
+        star.style.animationDelay = Math.random() * 50 + 's';
+      }
+      
+      // Add warm glow for some stars
+      if (Math.random() > 0.5) {
+        const hue = Math.floor(Math.random() * 50) + 20; // Warm hues
+        star.style.boxShadow = `0 0 ${3 + Math.random() * 3}px rgba(255, ${hue + 150}, ${hue}, 0.8)`;
+      }
+      
+      body.appendChild(star);
     }
     
     // Create cyber cursor
@@ -100,6 +139,18 @@ document.write('<script src="/js/custom.js"></script>');
         setTimeout(() => {
           ripple.remove();
         }, 1000);
+      });
+      
+      // Add hover glow to navigation links
+      const navLinks = document.querySelectorAll('a, button, input[type="button"], .pagination *, .card *');
+      navLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+          cursor.classList.add('hover');
+        });
+        
+        link.addEventListener('mouseleave', function() {
+          cursor.classList.remove('hover');
+        });
       });
     }
   }

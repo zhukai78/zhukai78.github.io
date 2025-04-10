@@ -1,21 +1,44 @@
-// Snowflake effect
-function initSnowflakes() {
-  const snowflakes = 50; // Number of snowflakes
+// Starlight effect (replacing snowflake)
+function initStarlight() {
+  const stars = 100; // Number of stars
   const body = document.querySelector('body');
   
-  // Create snowflakes
-  for (let i = 0; i < snowflakes; i++) {
-    const snowflake = document.createElement('div');
-    snowflake.classList.add('snowflake');
-    snowflake.textContent = '❄';
-    snowflake.style.left = Math.random() * 100 + 'vw';
-    snowflake.style.animationDelay = Math.random() * 10 + 's';
-    snowflake.style.animationDuration = 5 + Math.random() * 10 + 's';
-    body.appendChild(snowflake);
+  // Create stars
+  for (let i = 0; i < stars; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    
+    // Randomize star properties
+    const size = Math.random() * 2 + 1;
+    const isTwinkle = Math.random() > 0.7; // 30% stars will twinkle
+    
+    if (isTwinkle) {
+      star.classList.add('twinkle');
+    }
+    
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.width = star.style.height = size + 'px';
+    star.style.opacity = Math.random() * 0.5 + 0.5;
+    
+    // Different animation speeds
+    if (isTwinkle) {
+      star.style.animationDuration = 1 + Math.random() * 3 + 's';
+    } else {
+      star.style.animationDuration = 50 + Math.random() * 100 + 's';
+      star.style.animationDelay = Math.random() * 50 + 's';
+    }
+    
+    // Add warm glow for some stars
+    if (Math.random() > 0.5) {
+      const hue = Math.floor(Math.random() * 50) + 20; // Warm hues
+      star.style.boxShadow = `0 0 ${3 + Math.random() * 3}px rgba(255, ${hue + 150}, ${hue}, 0.8)`;
+    }
+    
+    body.appendChild(star);
   }
 }
 
-// Cyberpunk cursor
+// Cyberpunk cursor with warm colors
 function initCyberCursor() {
   // Check if cursor already exists
   if (document.querySelector('.cyber-cursor')) return;
@@ -57,22 +80,41 @@ function initCyberCursor() {
   });
 }
 
+// Add warm glow to headings on hover
+function initTextEffects() {
+  const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  
+  headings.forEach(heading => {
+    heading.addEventListener('mouseenter', function() {
+      this.style.textShadow = '0 0 10px rgba(230, 126, 34, 0.8)';
+      this.style.transition = 'text-shadow 0.3s ease';
+    });
+    
+    heading.addEventListener('mouseleave', function() {
+      this.style.textShadow = '0 0 3px rgba(230, 126, 34, 0.3)';
+    });
+  });
+}
+
 // Initialize effects when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-  initSnowflakes();
+  initStarlight();
   initCyberCursor();
+  initTextEffects();
 });
 
 // Also initialize when pjax:complete is triggered (for Butterfly theme compatibility)
 document.addEventListener('pjax:complete', function() {
-  initSnowflakes();
+  initStarlight();
   initCyberCursor();
+  initTextEffects();
 });
 
 // Fallback initialization for when DOMContentLoaded already fired
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   setTimeout(function() {
-    initSnowflakes();
+    initStarlight();
     initCyberCursor();
+    initTextEffects();
   }, 1);
 } 

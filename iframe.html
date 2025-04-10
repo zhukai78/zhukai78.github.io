@@ -6,8 +6,8 @@
 <meta property="og:description" content="Effects Loader        body {       margin: 0;       padding: 0;       overflow: hidden;       height: 0;       width: 0;     }     iframe {       border: none;       position: fixed;       top">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zhukai78.github.io/img/butterfly-icon.png">
-<meta property="article:published_time" content="2025-04-10T08:49:52.257Z">
-<meta property="article:modified_time" content="2025-04-10T08:49:52.257Z">
+<meta property="article:published_time" content="2025-04-10T09:06:03.563Z">
+<meta property="article:modified_time" content="2025-04-10T09:06:03.563Z">
 <meta property="article:author" content="Anime Lover">
 <meta property="article:tag" content="二次元, 动漫, 博客, anime, blog">
 <meta name="twitter:card" content="summary">
@@ -69,13 +69,13 @@
       const activateDarkMode = () => {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
         }
       }
       const activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'undefined')
         }
       }
 
@@ -180,56 +180,108 @@
     // Direct injection of CSS
     const style = document.createElement('style');
     style.textContent = `
-      /* Snowflake effect */
-      .snowflake {
+      /* Starlight effect */
+      .star {
         position: fixed;
         top: -10px;
-        color: #fff;
-        font-size: 1.5em;
-        text-shadow: 0 0 5px rgba(0, 195, 255, 0.7);
-        z-index: 9999;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 5px rgba(255, 200, 100, 0.8), 0 0 10px rgba(255, 150, 50, 0.3);
+        z-index: 9995;
         pointer-events: none;
         user-select: none;
-        animation: snowfall linear infinite;
+        animation: starfall linear infinite;
       }
       
-      @keyframes snowfall {
-        0% { transform: translateY(0) rotate(0deg); }
-        100% { transform: translateY(100vh) rotate(360deg); }
+      .star.twinkle {
+        animation: twinkle linear infinite;
       }
       
-      /* Cyberpunk cursor */
+      @keyframes starfall {
+        0% { transform: translateY(0) translateX(0); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+      }
+      
+      @keyframes twinkle {
+        0%, 100% { 
+          opacity: 0.2;
+          width: 1px;
+          height: 1px;
+          box-shadow: 0 0 2px rgba(255, 200, 100, 0.4), 0 0 4px rgba(255, 150, 50, 0.2);
+        }
+        50% { 
+          opacity: 1;
+          width: 2px;
+          height: 2px;
+          box-shadow: 0 0 5px rgba(255, 200, 100, 0.8), 0 0 10px rgba(255, 150, 50, 0.3);
+        }
+      }
+      
+      /* Warm cyberpunk cursor */
       .cyber-cursor {
         position: fixed;
         width: 20px;
         height: 20px;
-        border: 2px solid #0ff;
+        border: 2px solid #e67e22;
         border-radius: 50%;
         transform: translate(-50%, -50%);
         pointer-events: none;
         z-index: 9999;
-        box-shadow: 0 0 15px #0ff, 0 0 10px #f0f, 0 0 20px #0ff;
+        box-shadow: 0 0 15px #e67e22, 0 0 10px #ff7800, 0 0 20px #e67e22;
         mix-blend-mode: screen;
         transition: width 0.2s, height 0.2s;
       }
       
       html, body { cursor: none !important; }
       a, button, input { cursor: none !important; }
+      
+      /* Dark theme */
+      body {
+        background-image: linear-gradient(to bottom, #0a0a0a, #121212);
+        color: #e0e0e0;
+      }
     `;
     document.head.appendChild(style);
     
     // Direct injection of JS
     function initEffects() {
-      // Create snowflakes
-      const snowflakes = 50;
-      for (let i = 0; i < snowflakes; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.classList.add('snowflake');
-        snowflake.textContent = '❄';
-        snowflake.style.left = Math.random() * 100 + 'vw';
-        snowflake.style.animationDelay = Math.random() * 10 + 's';
-        snowflake.style.animationDuration = 5 + Math.random() * 10 + 's';
-        document.body.appendChild(snowflake);
+      // Create stars
+      const stars = 100;
+      for (let i = 0; i < stars; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        
+        // Randomize star properties
+        const size = Math.random() * 2 + 1;
+        const isTwinkle = Math.random() > 0.7; // 30% stars will twinkle
+        
+        if (isTwinkle) {
+          star.classList.add('twinkle');
+        }
+        
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.width = star.style.height = size + 'px';
+        star.style.opacity = Math.random() * 0.5 + 0.5;
+        
+        // Different animation speeds
+        if (isTwinkle) {
+          star.style.animationDuration = 1 + Math.random() * 3 + 's';
+        } else {
+          star.style.animationDuration = 50 + Math.random() * 100 + 's';
+          star.style.animationDelay = Math.random() * 50 + 's';
+        }
+        
+        // Add warm glow for some stars
+        if (Math.random() > 0.5) {
+          const hue = Math.floor(Math.random() * 50) + 20; // Warm hues
+          star.style.boxShadow = `0 0 ${3 + Math.random() * 3}px rgba(255, ${hue + 150}, ${hue}, 0.8)`;
+        }
+        
+        document.body.appendChild(star);
       }
       
       // Create cyber cursor
@@ -270,7 +322,7 @@
           </div>
           <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%8A%A8%E6%BC%AB%E6%9D%82%E8%B0%88/"><span class="card-category-list-name">动漫杂谈</span><span class="card-category-list-count">1</span></a></li>
-          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F/" style="font-size: 1.1em; color: #999">个人感悟</a> <a href="/tags/%E5%8A%A8%E6%BC%AB/" style="font-size: 1.1em; color: #999">动漫</a> <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/" style="font-size: 1.1em; color: #999">二次元</a></div></div><div class="card-widget card-archives">
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%8A%A8%E6%BC%AB/" style="font-size: 1.1em; color: #999">动漫</a> <a href="/tags/%E4%B8%AA%E4%BA%BA%E6%84%9F%E6%82%9F/" style="font-size: 1.1em; color: #999">个人感悟</a> <a href="/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/" style="font-size: 1.1em; color: #999">二次元</a></div></div><div class="card-widget card-archives">
     <div class="item-headline">
       <i class="fas fa-archive"></i>
       <span>归档</span>
@@ -289,4 +341,4 @@
         </li>
       
     </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-04-10T08:51:44.072Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Anime Lover</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="/js/custom.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-04-10T09:06:25.888Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Anime Lover</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script src="/js/custom.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
