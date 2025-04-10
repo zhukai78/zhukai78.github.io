@@ -1,0 +1,170 @@
+/* Snowflake effect */
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: #fff;
+  font-size: 1.5em;
+  text-shadow: 0 0 5px rgba(0, 195, 255, 0.7);
+  z-index: 9999;
+  pointer-events: none;
+  user-select: none;
+  animation: snowfall linear infinite;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+/* Cyberpunk cursor */
+.cyber-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #0ff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 15px #0ff, 0 0 10px #f0f, 0 0 20px #0ff;
+  mix-blend-mode: screen;
+  transition: width 0.2s, height 0.2s;
+}
+
+html, body {
+  cursor: none !important;
+}
+
+a:hover, button:hover, input:hover {
+  cursor: none !important;
+}
+
+/* Fix for cursor on links */
+a, button, input {
+  cursor: none !important;
+}
+
+/* Cyberpunk ripple effect */
+.cyber-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.8) 0%, rgba(255, 0, 255, 0.5) 40%, rgba(0, 0, 0, 0) 70%);
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  animation: cyber-ripple 1s ease-out;
+}
+
+@keyframes cyber-ripple {
+  0% {
+    width: 0px;
+    height: 0px;
+    opacity: 1;
+  }
+  100% {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+  }
+}
+
+/* Enhanced cursor hover state */
+.cyber-cursor.hover {
+  width: 35px;
+  height: 35px;
+  background: rgba(0, 255, 255, 0.2);
+  mix-blend-mode: screen;
+  box-shadow: 0 0 20px #0ff, 0 0 30px #f0f;
+}
+
+/* Enhance link hover effects */
+#nav a:hover, 
+#aside-content .card-info a:hover, 
+.article-sort-item a:hover,
+.pagination a:hover,
+#recent-posts a:hover {
+  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+  color: #fff !important;
+  transition: all 0.3s ease;
+}
+
+/* Add glowing effect to buttons */
+.button--animated,
+button,
+.btn {
+  transition: all 0.3s ease !important;
+}
+
+.button--animated:hover,
+button:hover,
+.btn:hover {
+  box-shadow: 0 0 10px #0ff, 0 0 15px #f0f;
+  transform: translateY(-3px);
+}
+
+/* Add cyberpunk-style gradient borders to cards */
+.card-widget {
+  border: 2px solid transparent !important;
+  background-clip: padding-box !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.card-widget::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+  background: linear-gradient(45deg, #ff00e5, #00e0ff, #00ff72, #ff00e5);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+  pointer-events: none;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-widget:hover::before {
+  opacity: 1;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add subtle scanline effect to page */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.5;
+} 
