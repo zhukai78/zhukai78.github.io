@@ -1,40 +1,60 @@
-/* Dark warm theme override */
+/* 
+ * 自定义CSS样式
+ * Custom CSS for the anime blog theme 
+ */
+
 :root {
-  --global-bg: #121212;
-  --card-bg: #1e1e1e;
-  --btn-bg: #e67e22;
-  --btn-hover-color: #d35400;
-  --font-color: #e0e0e0;
-  --hr-border: #333333;
-  --blockquote-color: #e67e22;
-  --blockquote-bg: rgba(50, 30, 10, 0.5);
-  --reward-bg: #1e1e1e;
-  --reward-pop: #1e1e1e;
+  /* 全局颜色变量 - 暖色调深色主题 */
+  /* Global color variables - Warm dark theme */
+  --bg-color: #121212;
+  --card-bg: #1d1d1d;
+  --font-color: #f0e6d2; /* Brightened text color for better readability */
+  --font-color-dimmed: #c0b8ae;
+  --link-color: #f39c12;
+  --link-hover: #ffb84d; /* Brighter hover color */
+  --title-color: #ffb266;
+  --meta-color: #c5bdb3; /* Brightened meta color for better visibility */
+  --border-color: #2c2c2c;
+  --box-shadow-color: rgba(255, 165, 0, 0.15);
+  --btn-bg: #ff8c41;
+  --btn-hover: #ffae76;
+  --code-bg: #2a2a2a;
+  --code-color: #f0e6d2;
+  --blockquote-border: #ff8c41;
+  --blockquote-bg: rgba(255, 165, 0, 0.05);
+  --hr-color: #2c2c2c;
+  --table-border: #2c2c2c;
+  --table-striped: rgba(255, 165, 0, 0.05);
+  --modal-bg: #1a1a1a;
+  --primary-color: #ff8c41;
+  --success-color: #67C23A;
+  --warning-color: #E6A23C;
+  --danger-color: #F56C6C;
+  --nav-bg: rgba(29, 29, 29, 0.8);
+  --theme-color: #e67e22;
+  --theme-color-light: #f39c12;
+  --theme-color-dark: #d35400;
+  --pre-bg: #262626;
+  --scrollbar-track: #1c1c1c;
+  --scrollbar-thumb: #e67e2266;
+  --scrollbar-thumb-hover: #e67e22;
+  
+  /* 字体设置 Typography */
+  --base-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --code-font: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 }
 
-body {
-  background-image: linear-gradient(to bottom, #0a0a0a, #121212);
-  color: var(--font-color);
-}
-
-#aside-content .card-info, .card-widget {
-  background: rgba(30, 30, 30, 0.8) !important;
-  box-shadow: 0 0 10px rgba(230, 126, 34, 0.1) !important;
-  backdrop-filter: blur(5px);
-}
-
-/* Starlight effect (replacing snowflake) */
+/* Star effect */
 .star {
   position: fixed;
   top: -10px;
-  width: 2px;
-  height: 2px;
+  width: 3px;
+  height: 3px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 5px rgba(255, 200, 100, 0.8), 0 0 10px rgba(255, 150, 50, 0.3);
-  z-index: 9995;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 12px rgba(255, 200, 100, 0.95), 0 0 20px rgba(255, 150, 50, 0.7);
+  z-index: -1;
   pointer-events: none;
-  user-select: none;
   animation: starfall linear infinite;
 }
 
@@ -43,200 +63,700 @@ body {
 }
 
 @keyframes starfall {
-  0% {
-    transform: translateY(0) translateX(0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) translateX(20px);
-    opacity: 0;
-  }
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
 }
 
 @keyframes twinkle {
-  0%, 100% {
-    opacity: 0.2;
-    width: 1px;
-    height: 1px;
-    box-shadow: 0 0 2px rgba(255, 200, 100, 0.4), 0 0 4px rgba(255, 150, 50, 0.2);
-  }
-  50% {
-    opacity: 1;
+  0%, 100% { 
+    opacity: 0.4;
     width: 2px;
     height: 2px;
-    box-shadow: 0 0 5px rgba(255, 200, 100, 0.8), 0 0 10px rgba(255, 150, 50, 0.3);
+    box-shadow: 0 0 6px rgba(255, 200, 100, 0.7), 0 0 10px rgba(255, 150, 50, 0.5);
+  }
+  50% { 
+    opacity: 1;
+    width: 4px;
+    height: 4px;
+    box-shadow: 0 0 15px rgba(255, 200, 100, 0.95), 0 0 25px rgba(255, 150, 50, 0.8);
   }
 }
 
-/* Warm cyberpunk cursor */
+/* Global styles */
+body {
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  font-family: var(--base-font);
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+  background-image: radial-gradient(circle at 50% 0, #1a1a1a, #0f0f0f);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: none;
+}
+
+a:not(.menu-item)::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--link-hover);
+  opacity: 0;
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+a:not(.menu-item):hover::after {
+  width: 100%;
+  opacity: 1;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--title-color);
+  font-weight: 600;
+  margin: 1.2em 0 0.6em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Added text shadow for better contrast */
+}
+
+.article-title {
+  color: var(--title-color);
+  font-size: 1.8em;
+  margin-bottom: 0.6em;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 5px rgba(255, 200, 100, 0.3);
+}
+
+.article-meta {
+  color: var(--meta-color);
+  font-size: 0.9em;
+  margin-bottom: 1.5em;
+}
+
+.recent-post-info .article-title {
+  font-size: 1.2em;
+  margin-bottom: 0.3em;
+}
+
+.post-meta-date-created, .post-meta-date-updated {
+  color: var(--meta-color);
+}
+
+/* Cards and containers */
+.card-widget {
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--box-shadow-color);
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card-widget:hover {
+  box-shadow: 0 6px 16px var(--box-shadow-color);
+  transform: translateY(-2px);
+}
+
+/* Button styles */
+.button--primary {
+  background-color: var(--btn-bg);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button--primary:hover {
+  background-color: var(--btn-hover);
+}
+
+/* Navigation */
+#nav {
+  background-color: var(--nav-bg);
+  backdrop-filter: blur(5px);
+}
+
+#nav a {
+  color: var(--font-color);
+}
+
+#nav a:hover {
+  color: var(--link-hover-color);
+}
+
+.site-name {
+  color: var(--title-color) !important;
+  font-weight: 700;
+}
+
+/* Footer styling */
+#footer {
+  background: var(--card-bg);
+  color: var(--meta-color);
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+#footer a {
+  color: var(--link-color);
+}
+
+#footer a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Code blocks */
+pre, code {
+  background: var(--code-bg);
+  color: var(--code-color);
+  border-radius: 3px;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid var(--blockquote-border);
+  background-color: var(--blockquote-bg);
+  padding: 0.5em 1em;
+  margin: 1em 0;
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid var(--hr-color);
+  margin: 2em 0;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+table th, table td {
+  padding: 8px;
+  border: 1px solid var(--table-border);
+}
+
+table tr:nth-child(even) {
+  background-color: var(--table-striped);
+}
+
+/* Pagination */
+.pagination-button {
+  background-color: var(--card-bg);
+  color: var(--font-color);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s;
+}
+
+.pagination-button:hover {
+  background-color: var(--btn-bg);
+  color: #fff;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .article-title {
+    font-size: 1.4em;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  img {
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
+  }
+  
+  img:hover {
+    opacity: 1;
+  }
+}
+
+/* Category and tag pills */
+.tag-list a, .category-list a {
+  display: inline-block;
+  background: rgba(255, 140, 65, 0.1);
+  color: var(--link-color);
+  border-radius: 16px;
+  padding: 4px 12px;
+  margin: 0 5px 5px 0;
+  transition: all 0.3s ease;
+}
+
+.tag-list a:hover, .category-list a:hover {
+  background: rgba(255, 140, 65, 0.2);
+  color: var(--link-hover-color);
+}
+
+/* Article content styling */
+.article-content p {
+  line-height: 1.8;
+  margin: 1em 0;
+}
+
+.article-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin: 1em 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Glow effects for enhanced warmth */
+a, .site-title, .article-title {
+  position: relative;
+}
+
+.article-title:hover {
+  text-shadow: 0 0 8px rgba(255, 165, 0, 0.3);
+}
+
+/* Sidebar improvements */
+.card-info-avatar {
+  transition: all 0.3s ease;
+}
+
+.card-info-avatar:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.card-info-data-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-info-data-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--link-color);
+  transition: width 0.3s ease;
+}
+
+.card-info-data-item:hover::after {
+  width: 100%;
+}
+
+/* Modern divider style */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: var(--meta-color);
+  margin: 2em 0;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.divider::before {
+  margin-right: 0.5em;
+}
+
+.divider::after {
+  margin-left: 0.5em;
+}
+
+/* Card brightness on hover */
+.recent-post-item:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+/* Custom highlight color */
+::selection {
+  background-color: rgba(255, 140, 65, 0.3);
+  color: var(--font-color);
+}
+
+/* Comments area styling */
+.v[data-class=v] .vicon:hover {
+  color: var(--link-hover-color);
+}
+
+.v[data-class=v] .vbtn {
+  color: #fff;
+  background: var(--btn-bg);
+}
+
+.v[data-class=v] .vbtn:hover {
+  background: var(--btn-hover);
+}
+
+.v[data-class=v] .vlist .vcard .vhead .vnick {
+  color: var(--link-color);
+}
+
+.v[data-class=v] .vlist .vcard .vh .vmeta .vat {
+  color: var(--link-color);
+}
+
+.v[data-class=v] a:hover {
+  color: var(--link-hover-color);
+}
+
+.v[data-class=v] .vlist .vcard .vcontent {
+  color: var(--font-color);
+}
+
+/* =================== 特殊效果 Special Effects =================== */
+
+/* 星光效果 Star effect */
+.star-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.star {
+  position: absolute;
+  width: 3px; /* Increased star size */
+  height: 3px; /* Increased star size */
+  top: -10px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255, 200, 100, 0.9), 0 0 20px rgba(255, 150, 50, 0.7);
+  animation: starfall linear infinite;
+  opacity: 0.8; /* Increased opacity */
+  z-index: 1;
+}
+
+.star.twinkle {
+  animation: twinkle ease-in-out infinite;
+}
+
+@keyframes starfall {
+  0% { transform: translateY(-10px); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.9; } /* Increased opacity */
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes twinkle {
+  0%, 100% { 
+    opacity: 0.4; /* Slightly increased base opacity */
+    width: 2px;
+    height: 2px;
+    box-shadow: 0 0 5px rgba(255, 200, 100, 0.6), 0 0 8px rgba(255, 150, 50, 0.4);
+  }
+  50% { 
+    opacity: 1;
+    width: 4px; /* Larger at peak */
+    height: 4px; /* Larger at peak */
+    box-shadow: 0 0 15px rgba(255, 200, 100, 0.95), 0 0 25px rgba(255, 150, 50, 0.8);
+  }
+}
+
+/* 自定义光标 Custom cursor */
 .cyber-cursor {
-  position: fixed !important;
+  position: fixed;
   width: 20px;
   height: 20px;
-  border: 2px solid #e67e22;
+  border: 2px solid var(--theme-color);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 9999;
-  box-shadow: 0 0 15px #e67e22, 0 0 10px #ff7800, 0 0 20px #e67e22;
+  box-shadow: 0 0 15px rgba(230, 126, 34, 0.7), 0 0 10px rgba(255, 120, 0, 0.5);
   mix-blend-mode: screen;
-  transition: width 0.2s, height 0.2s;
-  will-change: transform;
-  top: 0;
-  left: 0;
+  transition: width 0.2s, height 0.2s, border 0.2s;
 }
 
-html, body {
-  cursor: none !important;
+.cyber-cursor.hover {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--theme-color-light);
+  box-shadow: 0 0 20px rgba(243, 156, 18, 0.8), 0 0 15px rgba(255, 150, 0, 0.6);
 }
 
-a, button, input {
-  cursor: none !important;
-}
-
-/* Cyberpunk ripple effect with warm colors */
 .cyber-ripple {
-  position: fixed !important;
+  position: fixed;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(230, 126, 34, 0.8) 0%, rgba(255, 120, 0, 0.5) 40%, rgba(0, 0, 0, 0) 70%);
   width: 10px;
   height: 10px;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  z-index: 9999;
+  z-index: 9998;
   animation: cyber-ripple 1s ease-out;
 }
 
 @keyframes cyber-ripple {
-  0% {
-    width: 0px;
-    height: 0px;
-    opacity: 1;
+  0% { width: 0px; height: 0px; opacity: 1; }
+  100% { width: 200px; height: 200px; opacity: 0; }
+}
+
+html.cursor-custom, 
+html.cursor-custom body, 
+html.cursor-custom a, 
+html.cursor-custom button {
+  cursor: none !important;
+}
+
+/* =================== 文章内容 Article Content =================== */
+.post-content {
+  line-height: 1.9;
+}
+
+.post-content p {
+  margin-bottom: 1.2em;
+  color: #f0e6d2; /* Brightened text color */
+}
+
+.post-content h1, 
+.post-content h2, 
+.post-content h3, 
+.post-content h4 {
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  color: #ffb266; /* Brighten headings for better visibility */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Added subtle shadow for contrast */
+}
+
+.post-content h1 {
+  font-size: 1.8em;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.post-content h2 {
+  font-size: 1.5em;
+}
+
+.post-content h3 {
+  font-size: 1.3em;
+}
+
+.post-content h4 {
+  font-size: 1.15em;
+}
+
+.post-content img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin: 1.5em 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.post-content img:hover {
+  transform: scale(1.01);
+}
+
+.post-content blockquote {
+  border-left: 4px solid var(--theme-color);
+  background-color: rgba(230, 126, 34, 0.05);
+  padding: 15px 20px;
+  margin: 20px 0;
+  color: #d5cdc0;
+  border-radius: 0 4px 4px 0;
+}
+
+.post-content ul, 
+.post-content ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.2em;
+  color: #e0d8cc;
+}
+
+.post-content li {
+  margin-bottom: 0.5em;
+}
+
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+}
+
+.post-content table th,
+.post-content table td {
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+}
+
+.post-content table th {
+  background-color: rgba(230, 126, 34, 0.1);
+  color: #f0e6d2;
+}
+
+.post-content table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* =================== 响应式设计 Responsive Design =================== */
+@media (max-width: 768px) {
+  .card, .card-widget {
+    margin-bottom: 15px;
   }
-  100% {
-    width: 200px;
-    height: 200px;
-    opacity: 0;
+  
+  .post-content h1 {
+    font-size: 1.6em;
+  }
+  
+  .post-content h2 {
+    font-size: 1.4em;
+  }
+  
+  .post-content h3 {
+    font-size: 1.2em;
   }
 }
 
-/* Enhanced cursor hover state with warm colors */
-.cyber-cursor.hover {
-  width: 35px;
-  height: 35px;
-  background: rgba(230, 126, 34, 0.2);
-  mix-blend-mode: screen;
-  box-shadow: 0 0 20px #e67e22, 0 0 30px #ff7800;
+/* 暗色模式优化 Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #121212;
+    --card-bg: #1d1d1d;
+    --font-color: #e8e0d5;
+  }
 }
 
-/* Enhance link hover effects with warm colors */
-#nav a:hover, 
-#aside-content .card-info a:hover, 
-.article-sort-item a:hover,
-.pagination a:hover,
-#recent-posts a:hover {
-  text-shadow: 0 0 5px #e67e22, 0 0 10px #ff7800;
-  color: #fff !important;
+/* =================== 自定义模块 Custom Modules =================== */
+
+/* 标签云 Tag cloud */
+.tag-cloud {
+  margin: 20px 0;
+}
+
+.tag-cloud a {
+  display: inline-block;
+  margin: 5px 8px;
+  padding: 5px 10px;
+  background: rgba(230, 126, 34, 0.1);
+  border-radius: 15px;
+  color: #e8e0d5;
+  font-size: 0.9em;
   transition: all 0.3s ease;
 }
 
-/* Add glowing effect to buttons with warm colors */
-.button--animated,
-button,
-.btn {
-  transition: all 0.3s ease !important;
-  border-color: #e67e22 !important;
-  background-color: rgba(230, 126, 34, 0.1) !important;
+.tag-cloud a:hover {
+  background: rgba(243, 156, 18, 0.2);
+  transform: translateY(-2px);
+  color: var(--theme-color-light);
 }
 
-.button--animated:hover,
-button:hover,
-.btn:hover {
-  box-shadow: 0 0 10px #e67e22, 0 0 15px #ff7800;
-  transform: translateY(-3px);
-  background-color: rgba(230, 126, 34, 0.3) !important;
+/* 目录 TOC */
+.toc {
+  background-color: rgba(29, 29, 29, 0.7);
+  border-radius: 6px;
+  padding: 15px;
+  margin: 20px 0;
+  border-left: 3px solid var(--theme-color);
 }
 
-/* Add warm gradient borders to cards */
-.card-widget {
-  border: 2px solid transparent !important;
-  background-clip: padding-box !important;
-  position: relative !important;
-  overflow: hidden !important;
+.toc-content {
+  padding-left: 1em;
 }
 
-.card-widget::before {
+.toc-item {
+  margin: 8px 0;
+}
+
+.toc-link {
+  color: #d5cdc0;
+  transition: all 0.3s ease;
+}
+
+.toc-link:hover {
+  color: var(--theme-color-light);
+}
+
+/* 分页 Pagination */
+.pagination {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.page-number,
+.extend {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: var(--card-bg);
+  color: var(--font-color);
+  transition: all 0.3s ease;
+}
+
+.page-number.current {
+  background-color: var(--theme-color);
+  color: white;
+}
+
+.page-number:hover,
+.extend:hover {
+  background-color: rgba(230, 126, 34, 0.2);
+}
+
+/* 暖色调发光效果 Warm glow effects */
+.warm-glow {
+  position: relative;
+}
+
+.warm-glow::before {
   content: '';
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  z-index: -1;
-  background: linear-gradient(45deg, #e67e22, #ff7800, #d35400, #e67e22);
-  background-size: 400% 400%;
-  animation: gradient 10s ease infinite;
-  pointer-events: none;
-  border-radius: 8px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card-widget:hover::before {
-  opacity: 1;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Add subtle warm scanline effect to page */
-body::after {
-  content: '';
-  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(50, 30, 10, 0.03) 0px,
-    rgba(50, 30, 10, 0.03) 1px,
-    transparent 1px,
-    transparent 2px
-  );
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 20px rgba(230, 126, 34, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
   pointer-events: none;
-  z-index: 9996;
-  opacity: 0.5;
 }
 
-/* Add subtle warm glow to headings */
-h1, h2, h3, h4, h5, h6 {
-  color: #e0e0e0;
-  text-shadow: 0 0 3px rgba(230, 126, 34, 0.3);
-}
-
-/* Post content styling */
-#article-container p {
-  color: #e0e0e0;
-}
-
-/* Code blocks styling */
-pre, code {
-  background-color: rgba(50, 30, 10, 0.5) !important;
-  color: #ff7800 !important;
+.warm-glow:hover::before {
+  opacity: 1;
 } 
